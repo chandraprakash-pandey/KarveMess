@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ChefHat, UtensilsCrossed, Sparkles } from 'lucide-react';
+import axios from "axios";
 
 function Menu() {
     const [menuItems, setMenuItems] = useState([]);

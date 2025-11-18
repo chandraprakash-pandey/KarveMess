@@ -10,6 +10,7 @@ import User from './User/User.jsx'
 import Menu from './Menu/Menu.jsx'
 import FoodForm from './FoodForm/FoodForm.jsx'
 import EditItem from './EditItem/EditItem.jsx'
+import Subs from './subscription/subs.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +22,7 @@ const router = createBrowserRouter(
       <Route path='foodform' element={<FoodForm/>}/>
       <Route path='Menu' element={<Menu/>}/>
       <Route path=':foodItemId' element={<EditItem/>}/>
+      <Route path='subscription' element={<Subs/>}/>
       
     </Route>
   )

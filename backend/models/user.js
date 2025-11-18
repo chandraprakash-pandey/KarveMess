@@ -27,6 +27,10 @@ const userSchema = new Schema({
     },
     salt:{
         type:String
+    },
+    subscribed:{
+        type:Boolean,
+        default: false
     }
 } , {timestamps: true})
 

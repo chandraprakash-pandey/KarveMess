@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock, ArrowRight, LogIn, Eye, EyeOff } from "lucide-react";
@@ -13,6 +13,16 @@ function Login() {
     const [errors, setErrors] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    
+    
+
+    
+    useEffect(() => {
+        axios.get("http://localhost:8000/user", { withCredentials: true })
+            .then(res => {
+              window.location.href = "/User";
+            })
+    }, [])
 
     const validateForm = () => {
         const newErrors = {};

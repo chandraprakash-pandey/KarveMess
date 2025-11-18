@@ -7,7 +7,8 @@ export function createTokenForUser(user){
         email:user.email,
         fullName:user.fullName,
         messName:user.messName,
-        messAddress:user.messAddress
+        messAddress:user.messAddress,
+        subscribed:user.subscribed,
     }
     const token = JWT.sign(payload,secret);
 
