@@ -10,6 +10,8 @@ import {checkForAuthentication, restrictTo} from "./middleware/auth.js"
 import menuRouter from "./routes/menuRouter.js";
 import myItemsRouter from "./routes/myItemsRouter.js";
 import editItemRouter from "./routes/editItemRouter.js";
+import paymentRoutes from "./routes/paymentRoutes.js"
+import Razorpay from "razorpay"
 
 dotenv.config();
 
@@ -29,9 +31,17 @@ app.use("/fooditems",restrictTo(), fooditemsRouter);
 app.use("/menu", menuRouter);
 app.use("/myItems", myItemsRouter);
 app.use("/editItem", editItemRouter);
+app.use("/api",paymentRoutes);
 
 app.get("/", (req,res) => {
+    console.log(req.user._id);
     return res.json({mssg: "Hello World"});
 })
+
+export const instance = new Razorpay({
+    key_id: process.env.RAZORPAY_API_KEY,
+    key_secret: process.env.RAZORPAY_API_SECRET
+})
+
 
 app.listen(PORT, () => console.log(`Server Running at http://localhost:${PORT}`));
