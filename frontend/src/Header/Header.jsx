@@ -9,6 +9,13 @@ function Header() {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const [subs, setSubs] = useState(false);
+    const today = new Date();
+    const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+
+    const dayName = days[today.getDay()];
+
+    console.log(dayName);
+    
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -95,23 +102,23 @@ function Header() {
 
     return (
         <nav className={`${subs
-                ? 'bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-900 border-b-2 border-yellow-400/30'
-                : 'bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900'
+                ? 'bg-linear-to-r from-purple-900 via-indigo-900 to-purple-900 border-b-2 border-yellow-400/30'
+                : 'bg-linear-to-r from-gray-900 via-gray-800 to-gray-900'
             } shadow-2xl sticky top-0 z-50 backdrop-blur-sm bg-opacity-95`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
                     <NavLink to="/" className="flex items-center space-x-2 group">
                         <div className={`${subs
-                                ? 'bg-gradient-to-br from-yellow-400 to-amber-500'
-                                : 'bg-gradient-to-br from-blue-500 to-purple-600'
+                                ? 'bg-linear-to-br from-yellow-400 to-amber-500'
+                                : 'bg-linear-to-br from-blue-500 to-purple-600'
                             } p-2 rounded-lg group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                             <Utensils className="w-6 h-6 text-white" />
                         </div>
                         <div className="flex items-center space-x-2">
                             <h1 className={`text-2xl font-bold ${subs
-                                    ? 'bg-gradient-to-r from-yellow-400 to-amber-500'
-                                    : 'bg-gradient-to-r from-blue-400 to-purple-500'
+                                    ? 'bg-linear-to-r from-yellow-400 to-amber-500'
+                                    : 'bg-linear-to-r from-blue-400 to-purple-500'
                                 } bg-clip-text text-transparent`}>
                                 KarveMess
                             </h1>
@@ -150,7 +157,7 @@ function Header() {
                                             <Utensils className="w-4 h-4" />
                                             <span>Menu</span>
                                         </NavLink>
-                                        <NavLink to="/foodform" className={activeNavClass}>
+                                        <NavLink to={`/foodform?day=${dayName}`} className={activeNavClass}>
                                             <Utensils className="w-4 h-4" />
                                             <span>Add Menu</span>
                                         </NavLink>
@@ -159,7 +166,7 @@ function Header() {
                                         {!subs && (
                                             <button
                                                 onClick={handleSubscribe}
-                                                className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                                                className="flex items-center space-x-2 px-4 py-2 bg-linear-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-white rounded-lg font-medium transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
                                             >
                                                 <Crown className="w-4 h-4" />
                                                 <span>Go Premium</span>
@@ -170,12 +177,12 @@ function Header() {
                                         <div className={`flex items-center space-x-3 ml-4 pl-4 ${subs ? 'border-l border-yellow-400/30' : 'border-l border-gray-700'
                                             }`}>
                                             <NavLink to='/user' className={`flex items-center space-x-2 px-3 py-2 ${subs
-                                                    ? 'bg-gradient-to-r from-purple-800 to-indigo-800 border border-yellow-400/30'
+                                                    ? 'bg-linear-to-r from-purple-800 to-indigo-800 border border-yellow-400/30'
                                                     : 'bg-gray-800'
                                                 } rounded-lg transition-all duration-300 hover:scale-105`}>
                                                 <div className={`w-8 h-8 ${subs
-                                                        ? 'bg-gradient-to-br from-yellow-400 to-amber-500 ring-2 ring-yellow-400/50'
-                                                        : 'bg-gradient-to-br from-blue-500 to-purple-600'
+                                                        ? 'bg-linear-to-br from-yellow-400 to-amber-500 ring-2 ring-yellow-400/50'
+                                                        : 'bg-linear-to-br from-blue-500 to-purple-600'
                                                     } rounded-full flex items-center justify-center`}>
                                                     {subs ? (
                                                         <Crown className="w-4 h-4 text-white" />
@@ -262,12 +269,12 @@ function Header() {
                                 ) : (
                                     <>
                                         <div className={`flex items-center space-x-2 px-4 py-3 ${subs
-                                                ? 'bg-gradient-to-r from-purple-800 to-indigo-800 border border-yellow-400/30'
+                                                ? 'bg-linear-to-r from-purple-800 to-indigo-800 border border-yellow-400/30'
                                                 : 'bg-gray-800'
                                             } rounded-lg mb-3`}>
                                             <div className={`w-10 h-10 ${subs
-                                                    ? 'bg-gradient-to-br from-yellow-400 to-amber-500 ring-2 ring-yellow-400/50'
-                                                    : 'bg-gradient-to-br from-blue-500 to-purple-600'
+                                                    ? 'bg-linear-to-br from-yellow-400 to-amber-500 ring-2 ring-yellow-400/50'
+                                                    : 'bg-linear-to-br from-blue-500 to-purple-600'
                                                 } rounded-full flex items-center justify-center`}>
                                                 {subs ? (
                                                     <Crown className="w-5 h-5 text-white" />
@@ -311,7 +318,7 @@ function Header() {
                                         {!subs && (
                                             <button
                                                 onClick={handleSubscribe}
-                                                className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-gradient-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-white rounded-lg font-medium transition-all duration-300 shadow-lg"
+                                                className="w-full flex items-center justify-center space-x-2 px-4 py-3 bg-linear-to-r from-yellow-400 to-amber-500 hover:from-yellow-500 hover:to-amber-600 text-white rounded-lg font-medium transition-all duration-300 shadow-lg"
                                             >
                                                 <Crown className="w-5 h-5" />
                                                 <span>Upgrade to Premium</span>

@@ -9,9 +9,9 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const { chefId, item } = req.body;
+        const { chefId, item, day } = req.body;
 
-        await FoodItem.create({ chefId, item });
+        await FoodItem.create({ chefId, item, day });
 
         res.status(201).json({ message: "Food item created successfully" });
     } catch (error) {

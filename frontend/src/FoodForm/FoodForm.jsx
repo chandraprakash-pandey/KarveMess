@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { Plus, Trash2, UtensilsCrossed, DollarSign, Save, ArrowLeft, Crown, Sparkles, Star, Zap } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Plus, Trash2, UtensilsCrossed, DollarSign, Save, ArrowLeft, Crown, Sparkles, Star, Zap, Search } from "lucide-react";
+import Days from "./Days";
 
 function FoodForm() {
   const [user, setUser] = useState({});
@@ -10,7 +11,17 @@ function FoodForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [subs, setSubs] = useState(false);
   const [loading, setLoading] = useState(true);
+  const {search, pathname} = useLocation();
+  const params = new URLSearchParams(search);
+  const day = params.get("day");
 
+  const days = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+  const todayDay_index = new Date();
+  const todayDay = days[todayDay_index.getDay()];
+  
+
+  console.log("day", day);
+  
   useEffect(() => {
     axios.get("http://localhost:8000/user", { withCredentials: true })
       .then(res => {
@@ -59,6 +70,7 @@ function FoodForm() {
     const payload = {
       chefId: user._id,
       item: itemsMap,
+      day,
     };
 
     axios.post("http://localhost:8000/fooditems", payload, { withCredentials: true })
@@ -84,8 +96,9 @@ function FoodForm() {
   // Premium/Subscribed UI
   if (subs) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 py-12 px-4">
-        <div className="max-w-3xl mx-auto">
+      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 px-4">
+        <Days/>
+        <div className="max-w-3xl mx-auto py-8">
           {/* Premium Badge */}
           <div className="flex justify-center mb-6">
             <div className="inline-flex items-center bg-gradient-to-r from-yellow-400 to-amber-500 px-6 py-3 rounded-full shadow-2xl">
@@ -259,7 +272,10 @@ function FoodForm() {
       </div>
     );
   }
-
+  
+  if(day != todayDay){
+    navigate(`/foodform?day=${todayDay}`);
+  }
   // Standard/Free UI
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 py-12 px-4">
